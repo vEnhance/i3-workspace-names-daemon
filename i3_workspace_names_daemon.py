@@ -10,17 +10,21 @@ from fa_icons import icons
 
 I3_CONFIG_PATHS = tuple(os.path.expanduser(path) for path in ("~/.i3", "~/.config/i3", "~/.config/i3-regolith"))
 
-DEFAULT_APP_ICON_CONFIG = {
-    "chromium-browser": "chrome",
-    "firefox": "firefox",
-    "x-terminal-emulator": "terminal",
-    "thunderbird": "envelope",
-    "jetbrains-idea-ce": "edit",
-    "nautilus": "folder-open",
-    "clementine": "music",
-    "vlc": "play",
-    "signal": "comment"
-}
+DEFAULT_APP_ICON_CONFIG = {}
+
+CHINESE_LOOKUP = {
+	0: "零",
+	1: "壹",
+	2: "贰",
+	3: "叁",
+	4: "肆",
+	5: "伍",
+	6: "陆""
+	7: "柒",
+	8: "捌",
+	9: "玖",
+	10: "拾",
+	}
 
 
 def build_rename(i3, app_icons, args):
@@ -80,7 +84,7 @@ def build_rename(i3, app_icons, args):
                 names = [x for x in names if x not in seen and not seen.add(x)]
             names = delim.join(names)
             if int(workspace.num) >= 0:
-                newname = u"{}: {}".format(workspace.num, names)
+                newname = u"{}: {}".format(CHINESE_LOOKUP[workspace.num], names)
             else:
                 newname = names
 
