@@ -14,8 +14,6 @@ I3_CONFIG_PATHS = tuple(
 	os.path.expanduser(path) for path in ("~/.i3", "~/.config/i3", "~/.config/i3-regolith")
 )
 
-DEFAULT_APP_ICON_CONFIG = {}
-
 CHINESE_LOOKUP = {
 	0: "零",
 	1: "壹",
@@ -85,7 +83,7 @@ def build_rename(i3, app_icons, args):
 				names = [x for x in names if x not in seen and not seen.add(x)]
 			names = delim.join(names)
 			if int(workspace.num) >= 0:
-				newname = u"{}:「{}」{}".format(workspace.num, CHINESE[workspace.num], names)
+				newname = u"{}:「{}」{}".format(workspace.num, CHINESE_LOOKUP[workspace.num], names)
 			else:
 				newname = names
 
@@ -161,8 +159,7 @@ def _get_app_icons(config_path=None):
 		# normalise app-names to lower
 		return {k.lower(): v for k, v in app_icons.items()}
 	else:
-		print('Using default app-icon config {}'.format(DEFAULT_APP_ICON_CONFIG))
-		return dict(DEFAULT_APP_ICON_CONFIG)
+		return {}
 
 
 def _verbose_startup(i3):
