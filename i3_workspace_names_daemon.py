@@ -7,7 +7,6 @@ import os.path
 import re
 
 import i3ipc
-
 from fa_icons import icons
 
 I3_CONFIG_PATHS = tuple(
@@ -176,14 +175,18 @@ def _get_app_icons(config_path=None):
 def _verbose_startup(i3):
     for w in i3.get_tree().workspaces():
         print('WORKSPACE: "{}"'.format(w.name))
-        for i, l in enumerate(w.leaves()):
+        for i, leaf in enumerate(w.leaves()):
             print(
                 """===> leave: {}
 -> name: {}
 -> window_title: {}
 -> window_instance: {}
 -> window_class: {}""".format(
-                    i, l.name, l.window_title, l.window_instance, l.window_class
+                    i,
+                    leaf.name,
+                    leaf.window_title,
+                    leaf.window_instance,
+                    leaf.window_class,
                 )
             )
 
@@ -240,7 +243,7 @@ def main():
 
     # check for missing icons
     for app, icon_name in app_icons.items():
-        if not icon_name in icons:
+        if icon_name not in icons:
             print(
                 "Specified icon '{}' for app '{}' does not exist!".format(
                     icon_name, app
