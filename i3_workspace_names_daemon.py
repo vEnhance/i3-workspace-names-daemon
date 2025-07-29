@@ -14,20 +14,19 @@ I3_CONFIG_PATHS = tuple(
     for path in ("~/.i3", "~/.config/i3", "~/.config/i3-regolith")
 )
 
-CHINESE_LOOKUP = {
-    0: "零",
-    1: "壹",
-    2: "贰",
-    3: "叁",
-    4: "肆",
-    5: "伍",
-    6: "陆",
-    7: "柒",
-    8: "捌",
-    9: "玖",
-    10: "拾",
-}
-CHINESE = "零一二三四五六七八九十"
+WS_NUM_GLYPHS = (
+    "영",
+    "하나",
+    "둘",
+    "셋",
+    "넷",
+    "다섯",
+    "여섯",
+    "일곱",
+    "여덟",
+    "아홉",
+    "열",
+)
 
 
 def build_rename(i3, app_icons, args):
@@ -88,8 +87,8 @@ def build_rename(i3, app_icons, args):
                 names = [x for x in names if x not in seen and not seen.add(x)]
             names = delim.join(names)
             if int(workspace.num) >= 0:
-                newname = "{}:「{}」{}".format(
-                    workspace.num, CHINESE[workspace.num], names
+                newname = "{}: {} {}".format(
+                    workspace.num, WS_NUM_GLYPHS[workspace.num], names
                 )
             else:
                 newname = names
